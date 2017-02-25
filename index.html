@@ -2,14 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
 </head>
 <body>
   <button type="button" name="button" type="default"><a href="images/Pdf.png" download></a></button>
 
-  <a href="mapData()" download>
+  <a href="formatOutput()" download>
     <img border="0" src="images/Pdf.png" alt="" width="104" height="142">
   </a>
+  
+
+  <!-- Images.get() -->
+
+  <script>
+      var imagePath = "";
+
+
+      function formatOutput() {
+      //es6 template string
+        return imagePath.path
+      }
+
+      var options = {
+        width: 450,
+        height: 450
+      }
+
+      new DroneDeploy({ version: 1})
+        .then(function(dronedeployApi) {
+          return dronedeployApi.Plans.getCurrentlyViewed()
+                .then(function(plan) {
+                  return dronedeployApi.Images.get(plan.id, options)
+                })
+        })
+        .then(function(images) {
+          imagePath = images
+          console.log(imagePath);
+          console.log(imagePath[0].path)
+          console.log(imagePath[1].path)
+});
+</script>
+
+<!-- End Images.get() -->
+
 </body>
 </html>
